@@ -11,8 +11,10 @@ The CIFAKE authors' own Grad-CAM analysis suggested that their detector ignores 
 ### Data and models
 
 - **Dataset:** [CIFAKE](https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images), 120,000 images at 32×32: 60k real photos from CIFAR-10 and 60k generated with Stable Diffusion, in the same 10 classes. We add our own test variants (JPEG at several quality levels, resizing, blur, noise, screenshots).
-- **Main model:** [ResNet-18](https://pytorch.org/vision/stable/models/generated/torchvision.models.resnet18.html) pretrained on ImageNet and fine-tuned on CIFAKE as a real vs. AI-generated classifier, with checkpoints saved during fine-tuning.
-- **Optional:** a small CNN trained from scratch following the reference architecture in [Bird & Lotfi (2023)](https://arxiv.org/abs/2303.14126) (pretrained vs. from scratch), and [UniversalFakeDetect](https://github.com/WisconsinAIVision/UniversalFakeDetect) for a comparison on larger images.
+- **Models:** two real vs. AI-generated classifiers, to compare pretrained and from scratch:
+  - [ResNet-18](https://pytorch.org/vision/stable/models/generated/torchvision.models.resnet18.html), pretrained on ImageNet and fine-tuned on CIFAKE
+  - our own small CNN, trained from scratch on CIFAKE at 32×32
+- **Optional:** [UniversalFakeDetect](https://github.com/WisconsinAIVision/UniversalFakeDetect) for a comparison on larger images.
 
 ### Plan
 
