@@ -1,0 +1,26 @@
+{
+    "team_name": "Kandy",
+    "students": [
+        {
+            "student_id": "k12352658",
+            "first_name": "Kavindu Malshan",
+            "last_name": "Pathirage Don",
+            "email": "k12352658@students.jku.at",
+            "github_user": "kavimalshan"
+        },
+        {
+            "student_id": "k12454932",
+            "first_name": "Gabor",
+            "last_name": "Levai",
+            "email": "k12454932@students.jku.at",
+            "github_user": "LordNassel"
+        },
+        {
+            "student_id": "k12017433",
+            "first_name": "Adam",
+            "last_name": "Parkanyi",
+            "email": "k12017433@students.jku.at",
+            "github_user": "adamp-22"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "team_name": "Kandy",
+    "students": [
+        {
+            "first_name": "Kavindu Malshan",
+            "last_name": "Pathirage Don",
+            "workload": 0.33
+        },
+        {
+            "first_name": "Gabor",
+            "last_name": "Levai",
+            "workload": 0.33
+        },
+        {
+            "first_name": "Adam",
+            "last_name": "Parkanyi",
+            "workload": 0.33
+        }
+    ]
+}
