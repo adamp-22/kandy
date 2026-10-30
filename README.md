@@ -1,5 +1,7 @@
 # Kandy
 
+ # Gabor did this
+
 Team Kandy's project for the AI and Visualization Lab at JKU (Visual Data Science Lab), winter semester 2026.
 
 ## Topic: What fools an AI-image detector?
