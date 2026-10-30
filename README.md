@@ -51,4 +51,3 @@ The CIFAKE authors' own Grad-CAM analysis suggested that their detector ignores 
 ## Contents
 
 - `team-info.json`, `workload.json`: team registration
-- `Topic_Ideas_AI_Detectors.pdf`: our topic shortlist (we picked Topic 2, CIFAKE)
