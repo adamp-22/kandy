@@ -4,3 +4,16 @@
 
 # OS / editor
 .DS_Store
+
+# Local Python environment and downloaded datasets
+.venv/
+__pycache__/
+data/
+
+# Local model weights, predictions, plots, and training logs
+runs/
+.mplconfig/
+artifacts/
+.ipynb_checkpoints/
+.jupyter/
+.ipython/

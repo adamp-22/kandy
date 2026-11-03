@@ -1,0 +1,27 @@
+{
+  "n": 10000,
+  "loss": 0.14211816839695998,
+  "accuracy": 0.9454,
+  "balanced_accuracy": 0.9454,
+  "f1_fake": 0.9454327403557865,
+  "roc_auc_fake": 0.9882190399999999,
+  "fake_detection_rate": 0.946,
+  "real_flagged_fake_rate": 0.0552,
+  "brier_score_fake": 0.04031583546338646,
+  "confusion_matrix": [
+    [
+      4730,
+      270
+    ],
+    [
+      276,
+      4724
+    ]
+  ],
+  "confusion_matrix_order": [
+    "FAKE",
+    "REAL"
+  ],
+  "confusion_matrix_axes": "rows=true, columns=predicted",
+  "decision_rule": "REAL if sigmoid(logit) >= 0.5, otherwise FAKE"
+}

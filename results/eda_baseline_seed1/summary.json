@@ -1,0 +1,106 @@
+{
+  "source_split": "train",
+  "split_seed": 1,
+  "sampling_seed": 2026,
+  "manifest_sha256": "098210d89f9441376008d520f72aeef5f65a7aa6b5e0073ba4e875c979e1f205",
+  "image_shape_chw": [
+    3,
+    32,
+    32
+  ],
+  "image_count": 88702,
+  "class_counts": {
+    "REAL": 45000,
+    "FAKE": 43702
+  },
+  "property_definitions": {
+    "brightness": "Mean of 0.299R + 0.587G + 0.114B, RGB scaled to [0,1]",
+    "contrast": "Population standard deviation of luma",
+    "saturation": "Mean HSV saturation: (max(RGB)-min(RGB))/max(RGB), zero for black pixels",
+    "sharpness": "Population variance of the four-neighbor luma Laplacian over the 30x30 interior"
+  },
+  "property_statistics": {
+    "REAL": {
+      "brightness": {
+        "mean": 0.4809181248083711,
+        "median": 0.47554911673069,
+        "p10": 0.33170267939567566,
+        "p90": 0.639709985256195
+      },
+      "contrast": {
+        "mean": 0.19614393642383318,
+        "median": 0.19461063295602798,
+        "p10": 0.11888984739780425,
+        "p90": 0.2748594403266907
+      },
+      "saturation": {
+        "mean": 0.27853875305223175,
+        "median": 0.2587869316339493,
+        "p10": 0.10863982737064362,
+        "p90": 0.4803850710391998
+      },
+      "sharpness": {
+        "mean": 0.03629522874691239,
+        "median": 0.032118506729602814,
+        "p10": 0.013114017248153687,
+        "p90": 0.06413323059678078
+      }
+    },
+    "FAKE": {
+      "brightness": {
+        "mean": 0.4407104177031453,
+        "median": 0.4394540786743164,
+        "p10": 0.33632568418979647,
+        "p90": 0.5466289520263672
+      },
+      "contrast": {
+        "mean": 0.20144372957361673,
+        "median": 0.20313222706317902,
+        "p10": 0.12567627429962158,
+        "p90": 0.27383563816547396
+      },
+      "saturation": {
+        "mean": 0.3592206030895844,
+        "median": 0.36104968190193176,
+        "p10": 0.04454313963651657,
+        "p90": 0.6391755104064942
+      },
+      "sharpness": {
+        "mean": 0.0601074967511288,
+        "median": 0.055313965305686,
+        "p10": 0.021735176257789136,
+        "p90": 0.10421926751732827
+      }
+    }
+  },
+  "frequency_method": "Hann-weighted centering, 2-D Hann window, FFT power, DC removed, per-image unit-sum normalization, class mean",
+  "spectrum_counts": {
+    "REAL": 45000,
+    "FAKE": 43702
+  },
+  "excluded_spectrum_counts": {
+    "REAL": 0,
+    "FAKE": 0
+  },
+  "mean_energy_fraction_radius_ge_0_25": {
+    "REAL": 0.10930475582291532,
+    "FAKE": 0.1611218020965312
+  },
+  "gallery_images_per_class": 12,
+  "scatter_images_per_class": 800,
+  "figures": [
+    "01_split_audit.png",
+    "02_duplicate_examples.png",
+    "03_random_gallery.png",
+    "04_property_distributions.png",
+    "05_sharpness_extremes.png",
+    "06_scatter_overview.png",
+    "07_frequency_comparison.png"
+  ],
+  "scope": "Training pixels only; split audit also reads metadata for all splits. Added after the baseline run; no model or test-result changes.",
+  "limitations": [
+    "Descriptive class associations do not establish model reliance or causation.",
+    "Sharpness is a resolution-dependent proxy, not a direct measure of image quality.",
+    "Near-duplicates and semantic-category balance were not audited."
+  ]
+}

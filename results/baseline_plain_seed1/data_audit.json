@@ -1,0 +1,45 @@
+{
+  "seed": 1,
+  "validation_per_class": 5000,
+  "class_to_index": {
+    "FAKE": 0,
+    "REAL": 1
+  },
+  "split_counts": {
+    "train": {
+      "FAKE": 43702,
+      "REAL": 45000
+    },
+    "val": {
+      "FAKE": 5000,
+      "REAL": 5000
+    },
+    "test": {
+      "FAKE": 10000,
+      "REAL": 10000
+    },
+    "excluded": {
+      "FAKE": 1298
+    }
+  },
+  "exclusion_counts": {
+    "identical_to_official_test": 378,
+    "repeated_training_image": 920
+  },
+  "duplicate_groups_in_original_data": 1336,
+  "official_test_size": 20000,
+  "unique_test_images": 19962,
+  "exact_pixel_overlap_across_splits": 0,
+  "policy": "Preserve official test; exclude training copies of test images; retain one copy of each remaining training image; seeded balanced validation holdout.",
+  "limitations": "Exact decoded RGB duplicates only; near-duplicates are not detected. Stratified by REAL/FAKE, not unverified semantic classes.",
+  "preprocessing": "Decode RGB at native 32x32; float32 / 255 at batch time; no augmentation.",
+  "file_sha256": {
+    "manifest.csv": "098210d89f9441376008d520f72aeef5f65a7aa6b5e0073ba4e875c979e1f205",
+    "test_images.npy": "44f702bd61617d83b2931543710202a0970f3fe7a404165250bf87298f265956",
+    "test_labels.npy": "b8d96e4206edaca562cf2f66e32a16ba6d339b80961aef56649ec520f3a7e310",
+    "train_images.npy": "1c81323787924f4ea539483af099d14581603a9b5a66a5e8b31d2dfca943ac73",
+    "train_labels.npy": "a93f11cc97ef095aa8cc2275cea6b4470ebc90079c943f8a3d001fbf9fe4dd20",
+    "val_images.npy": "a8f9afdeaf91b950ec798bbb3ab6bb1bc728df57edb1bd7b0bce2a13415bf72b",
+    "val_labels.npy": "3ec68053fcd769f859be3eb37b5607e5a1a6a676d14605fcf64395cc354757ad"
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "run": "baseline_plain_seed1",
+  "seed": 1,
+  "model_path": "models/baseline_plain_seed1.pt",
+  "model_sha256": "3536a73dfb75ef4c3a56abb87a117bda1ebe340054f9f805dfe10830c2c17b6e",
+  "architecture": "Conv(3,32,3)-ReLU-Pool(2)-Conv(32,32,3)-ReLU-Pool(2)-Flatten-Linear(1152,64)-ReLU-Linear(64,1)",
+  "parameters": 84001,
+  "augmentation": null,
+  "split_counts": {
+    "train": {
+      "FAKE": 43702,
+      "REAL": 45000
+    },
+    "val": {
+      "FAKE": 5000,
+      "REAL": 5000
+    },
+    "test": {
+      "FAKE": 10000,
+      "REAL": 10000
+    },
+    "excluded": {
+      "FAKE": 1298
+    }
+  },
+  "selected_epoch": 19,
+  "epochs_run": 24,
+  "selection": "Lowest validation BCE; fixed 0.5 probability threshold",
+  "stop_reason": "early_stopping",
+  "validation": {
+    "n": 10000,
+    "loss": 0.14211816839695998,
+    "accuracy": 0.9454,
+    "balanced_accuracy": 0.9454,
+    "f1_fake": 0.9454327403557865,
+    "roc_auc_fake": 0.9882190399999999,
+    "fake_detection_rate": 0.946,
+    "real_flagged_fake_rate": 0.0552,
+    "brier_score_fake": 0.04031583546338646,
+    "confusion_matrix": [
+      [
+        4730,
+        270
+      ],
+      [
+        276,
+        4724
+      ]
+    ],
+    "confusion_matrix_order": [
+      "FAKE",
+      "REAL"
+    ],
+    "confusion_matrix_axes": "rows=true, columns=predicted",
+    "decision_rule": "REAL if sigmoid(logit) >= 0.5, otherwise FAKE"
+  },
+  "official_test": {
+    "n": 20000,
+    "loss": 0.150135284071081,
+    "accuracy": 0.9429,
+    "balanced_accuracy": 0.9429,
+    "f1_fake": 0.9428371208329162,
+    "roc_auc_fake": 0.9871081300000001,
+    "fake_detection_rate": 0.9418,
+    "real_flagged_fake_rate": 0.056,
+    "brier_score_fake": 0.04273324076033415,
+    "confusion_matrix": [
+      [
+        9418,
+        582
+      ],
+      [
+        560,
+        9440
+      ]
+    ],
+    "confusion_matrix_order": [
+      "FAKE",
+      "REAL"
+    ],
+    "confusion_matrix_axes": "rows=true, columns=predicted",
+    "decision_rule": "REAL if sigmoid(logit) >= 0.5, otherwise FAKE"
+  },
+  "unique_test": {
+    "n": 19962,
+    "loss": 0.14997819874616056,
+    "accuracy": 0.9429415890191364,
+    "balanced_accuracy": 0.9429395703673961,
+    "f1_fake": 0.942778196433057,
+    "roc_auc_fake": 0.9871262497490465,
+    "fake_detection_rate": 0.9418791407347922,
+    "real_flagged_fake_rate": 0.056,
+    "brier_score_fake": 0.042699774935900964,
+    "confusion_matrix": [
+      [
+        9383,
+        579
+      ],
+      [
+        560,
+        9440
+      ]
+    ],
+    "confusion_matrix_order": [
+      "FAKE",
+      "REAL"
+    ],
+    "confusion_matrix_axes": "rows=true, columns=predicted",
+    "decision_rule": "REAL if sigmoid(logit) >= 0.5, otherwise FAKE"
+  },
+  "manifest_sha256": "098210d89f9441376008d520f72aeef5f65a7aa6b5e0073ba4e875c979e1f205",
+  "training_source_sha256": {
+    "evaluate_baseline.py": "b6397570e50ffa51a11917a0bbb9e4f9a43df442ec028126a8b91287566f73c3",
+    "requirements.txt": "d7d6311fc37ec14884680aea9effb0c3750d094041ab3bfd9d425147cea9644f",
+    "baseline.py": "2b6cf463ff6ac2b313699f8d176dfff5cfae08a9e83273877868d6ea6db88afa",
+    "prepare_baseline_data.py": "29c36c7235157eca762969d6bc1743e1a4d601b4b0a9ec4b3ad2f6e696061f38",
+    "train_baseline.py": "ef1dc35dd11d9dd4aaad8476b86a15585257a0bea2f69ac38dbba2ec53ab46eb"
+  },
+  "training_parameters": {
+    "batch_size": 128,
+    "learning_rate": 0.001,
+    "epochs": 30,
+    "patience": 5,
+    "min_delta": 0.0001
+  },
+  "environment": {
+    "python": "3.12.14 (main, Sep  1 2026, 14:09:38) [Clang 22.1.3 ]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "scikit-learn": "1.9.1",
+      "setuptools": "84.2.1",
+      "cloudpickle": "3.1.2",
+      "kiwisolver": "1.5.1",
+      "packaging": "26.3",
+      "narwhals": "2.28.0",
+      "networkx": "3.7",
+      "joblib": "1.6.0",
+      "protobuf": "7.36.2",
+      "requests": "2.34.2",
+      "certifi": "2026.10.23",
+      "numpy": "2.5.4",
+      "pillow": "13.0.0",
+      "contourpy": "1.4.0",
+      "sympy": "1.14.0",
+      "tqdm": "4.70.1",
+      "urllib3": "2.8.0",
+      "mpmath": "1.3.0",
+      "PyYAML": "6.0.3",
+      "fsspec": "2026.9.0",
+      "matplotlib": "3.11.2",
+      "cycler": "0.12.1",
+      "Jinja2": "3.1.6",
+      "fonttools": "4.68.0",
+      "tzdata": "2026.6",
+      "threadpoolctl": "3.7.0",
+      "filelock": "4.2.7",
+      "typing_extensions": "4.16.0",
+      "MarkupSafe": "3.0.4",
+      "python-dateutil": "4.0.0",
+      "torch": "2.15.0",
+      "kagglesdk": "0.1.38",
+      "charset-normalizer": "3.5.2",
+      "pyparsing": "3.3.3",
+      "scipy": "1.18.1",
+      "kagglehub": "1.0.3",
+      "idna": "3.20"
+    }
+  },
+  "limitations": "Fixed threshold 0.5. No test-driven tuning. Clean CIFAKE performance only, not robustness or unseen-generator performance."
+}
