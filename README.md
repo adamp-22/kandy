@@ -38,7 +38,7 @@ The CIFAKE authors' own Grad-CAM analysis suggested that their detector ignores 
 | Name | GitHub |
 | --- | --- |
 | Kavindu Malshan Pathirage Don | [kavimalshan](https://github.com/kavimalshan) |
-| Gabor Levai | [LordNassel](https://github.com/LordNassel) |
+| G.L. | [LordNassel](https://github.com/LordNassel) |
 | Adam Parkanyi | [adamp-22](https://github.com/adamp-22) |
 
 ## Deadlines
