@@ -54,7 +54,8 @@ The CIFAKE authors' own Grad-CAM analysis suggested that their detector ignores 
 | --- | --- | --- |
 | `baseline_training.ipynb` | Training | Small CNN: data split and audit, training, epoch report, learning curves, official test evaluation (weights bundled) |
 | `resnet18_finetuning.ipynb` | Training | ResNet18 fine-tuning pipeline, epoch report, confusion matrix, clean test (weights from the team release) |
-| `phase1/01_training_data_exploration.ipynb` | I | How REAL and FAKE training images differ; hypotheses for the behaviour tests |
+| `phase1/01_training_data_exploration.ipynb` | I | How REAL and FAKE training images differ: properties, spectra, average images, colour channels, cues per object class, pixel-space projection; hypotheses for the behaviour tests |
+| `phase1/data/training_data_extra_bundle.npz` | I | Saved statistics used by `01` Section 5 (runs without the dataset) |
 | `phase1/02_cnn_behaviour.ipynb` | I | CNN under JPEG, blur, resize and noise on 10,000 validation images |
 | `phase1/03_resnet18_behaviour.ipynb` | I | ResNet18 under the same edits, next to the CNN |
 | `phase1/04_what_fools_the_detectors.ipynb` | I | Both models, 29 conditions: the sharpness dial, confidence shift, ICE curves, classes and colour, a map of the fakes, model agreement |
@@ -62,7 +63,6 @@ The CIFAKE authors' own Grad-CAM analysis suggested that their detector ignores 
 | `phase2/01_cnn_internals.ipynb` | II | CNN Grad-CAM, neuron contributions, occlusion, filters, channel removal |
 | `phase2/02_resnet18_internals.ipynb` | II | ResNet18 Grad-CAM, output contributions, occlusion, stem filters, channel interventions, explorer |
 | `docs/visualization_overview.md` | I + II | Every visualization with its phase, lecture technique and Phase I verdict, plus the Phase II plan |
-| `CIFAKE_plotting.ipynb`, `Plotting_01.ipynb`, `Plotting_02.ipynb`, `ResNet18.ipynb` | — | Teammates' exploration notebooks |
 | `team-info.json`, `workload.json` | — | Team registration |
 
-All notebooks open in review mode: they load saved weights and results and do not train. Run them from their own folder; the phase notebooks find the repository root through `team-info.json`.
+The analysis uses only the CIFAKE dataset with our audited split and our two models (baseline CNN, fine-tuned ResNet18). All notebooks open in review mode: they load saved weights and results and do not train. Run them from their own folder; the phase notebooks find the repository root through `team-info.json`.

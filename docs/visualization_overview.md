@@ -1,6 +1,8 @@
 # Visualization overview: Phase I and Phase II
 
-This document lists every visualization we currently have, says which phase it belongs to and which lecture technique it uses, and checks whether it meets the Phase I brief. It also describes the new Phase I notebook and a lecture-based plan for Phase II.
+This document lists every visualization we currently have, says which phase it belongs to and which lecture technique it uses, and checks whether it meets the Phase I brief. It also describes the new Phase I visualizations and a lecture-based plan for Phase II.
+
+**Scope.** Everything here builds on `baseline_training.ipynb` and `resnet18_finetuning.ipynb`: the **CIFAKE dataset with our audited split** (88,702 train / 10,000 validation / 20,000 test) and **our two models** (the baseline CNN and the fine-tuned ResNet18). Ideas from the team's early plotting notebooks were reimplemented on this data (see Section 3); nothing uses another dataset or another model.
 
 **Phase I brief (summary).** Treat the model as a black box (inputs and outputs only), use enough data to show systematic behaviour, and explain *patterns* in depth: what distinguishes a group of images, and which sub-groups exist. "Not a model performance report": a table of benchmark scores is not enough. Training data may be used as a source of hypotheses.
 
@@ -10,7 +12,7 @@ This document lists every visualization we currently have, says which phase it b
 | --- | --- | --- | --- |
 | `baseline_training.ipynb` | Training | CNN definition, data split and audit, training, epoch report, learning curves, official test evaluation | Yes (weights bundled) |
 | `resnet18_finetuning.ipynb` | Training | ResNet18 fine-tuning pipeline, epoch report, learning curves, confusion matrix, clean test | Yes (downloads the release package) |
-| `phase1/01_training_data_exploration.ipynb` | I | Training-data EDA (formerly baseline Section 4) and the hypotheses it gives | Yes (figures bundled) |
+| `phase1/01_training_data_exploration.ipynb` | I | Training-data EDA (formerly baseline Section 4), **new** Section 5 (average images, colour channels, cues per object class, fine detail and file size, pixel-space projection) and the hypotheses they give | Yes (figures and `phase1/data/training_data_extra_bundle.npz` bundled) |
 | `phase1/02_cnn_behaviour.ipynb` | I | CNN under JPEG, blur, resize and noise (formerly baseline Sections 10–11) | Yes |
 | `phase1/03_resnet18_behaviour.ipynb` | I | ResNet18 under the same edits, next to the CNN (formerly ResNet Section 6) | Yes (downloads the release package) |
 | `phase1/04_what_fools_the_detectors.ipynb` | I | **New.** Both models, 29 conditions, patterns behind the errors | Yes (`phase1/data/phase1_behaviour_bundle.npz`) |
@@ -62,17 +64,6 @@ Verdict key: **✔ Phase I**: black-box behaviour, fits the brief. **◐ Support
 | 8 | Stem filters, channel responses, top examples, channel interventions | Weight and activation views, ablation | II | `phase2/02` |
 | 9 | Interactive comparison | Explorable (L05) | II | `phase2/02` |
 
-### Teammates' notebooks
-
-These are listed for completeness and were **not changed** in this PR.
-
-| Notebook | Author | Content | Phase | Notes |
-| --- | --- | --- | --- | --- |
-| `CIFAKE_plotting.ipynb` | kavimalshan | Training-data EDA: class counts, sample grid, brightness/contrast, RGB and saturation, extremes, mean images and difference map, Fourier spectra, edge strength, optional PCA / t-SNE on pixels | I (hypothesis source) | The committed version has no saved outputs; run and commit it so the figures can be read on GitHub. Overlaps with `phase1/01`; the PCA / t-SNE part is the projection technique from L03. |
-| `Plotting_01.ipynb` | LordNassel | Class counts, brightness/contrast, extremes, mean images, scatter, RGB channels, Fourier spectra, edge density, t-SNE on pixels, Grad-CAM | I (EDA), II (Grad-CAM) | The Grad-CAM cell uses an ImageNet model without our trained CIFAKE weights (its own comment says so), so it does not explain our detectors. `phase2/` has Grad-CAM for both trained models. Images are sampled in `os.listdir` order, which can differ between machines; sort the list and use a seed. |
-| `Plotting_02.ipynb` | LordNassel | Class counts and proportions, sample grids, mean images and difference maps | I (EDA) | Plot titles refer to *faces*; check which dataset it reads before using it in the CIFAKE story. |
-| `ResNet18.ipynb` | LordNassel | ResNet-18 training, confusion matrix, confidence distribution, Grad-CAM | Training / II | Uses a different dataset (about 2,000 images), so it cannot be compared with the CIFAKE models. |
-
 ### Verdict
 
 The existing behaviour notebooks are a solid start for Phase I. They treat the models as black boxes, use all 10,000 validation images, separate missed fakes from false alarms, follow single images and include an explorer. The EDA gives clear hypotheses. Measured against the brief, five things were missing:
@@ -83,7 +74,21 @@ The existing behaviour notebooks are a solid start for Phase I. They treat the m
 4. **Image-level comparison of the two models.** The models were only compared through aggregate rates.
 5. **Too much performance reporting.** Learning curves, test tables and confusion matrices are performance reports, so they now stay in the training notebooks.
 
-## 3. New Phase I visualizations (`phase1/04_what_fools_the_detectors.ipynb`)
+## 3. New training-data views (`phase1/01_training_data_exploration.ipynb`, Section 5)
+
+These views take ideas from the team's first plotting notebooks (`Plotting_01`, `Plotting_02`) and recompute them on our audited CIFAKE training split (all 88,702 images; the projection uses a seeded, balanced sample of 2,000). The object class comes from the CIFAKE filename suffix. No model is used. Results are stored in a 2.4 MB bundle, so the section runs without the dataset; `RECOMPUTE_EXTRA = True` rebuilds it.
+
+| § | Figure | Idea taken from | Lecture technique | Main finding |
+| --- | --- | --- | --- | --- |
+| 5.1 | Average REAL and FAKE image, overall and per object class, with a \|FAKE − REAL\| map | Average images and difference heatmap (`Plotting_01`, `Plotting_02`) | Aggregation, small multiples (L02) | Fakes are darker, and the averages differ more at the border (0.053) than in the centre (0.019). The gap is largest for deer, frog and automobile. |
+| 5.2 | Pixel-value histograms per RGB channel; colour shift per object class | RGB channel distributions (`Plotting_01`), channel histograms (`Plotting_02`) | Overlaid distributions, dot plot (L02) | Fakes are 10–14 levels darker per channel, most in blue (frog −35, deer −34): a shift toward yellow and green. Near-white pixels are rarer in fakes. |
+| 5.3 | Median saturation and sharpness per class (dumbbells); per-class separability of each cue | Per-class version of the property distributions | Dumbbell chart, labelled scatter (L02) | The cues depend on the class. Sharpness separates cat images well (ROC-AUC 0.93) but hardly bird images (0.57). Saturation separates only frog (0.87) and deer (0.85). |
+| 5.4 | Sobel edge density; spectrum ratio FAKE/REAL; single-number separability including JPEG file size | Edge density, spectrum difference (`Plotting_01`), file metadata (`Plotting_02`) | Diverging heatmap, bar chart | Edge density barely separates the labels (0.56) although it correlates with the Laplacian (ρ 0.82; Laplacian 0.73). Fakes have about 2× more power at the finest frequencies, most along the vertical axis. File size gives nothing away (0.52). |
+| 5.5 | PCA and t-SNE of raw pixels, coloured by label and by brightness; k-nearest-neighbour agreement | t-SNE on flattened pixels (`Plotting_01`) | PCA, t-SNE with the L03 caveats | REAL and FAKE are mixed: 61 % of nearest neighbours share the label (chance 50 %). The maps are organized by brightness (PC1 ρ 0.90). |
+
+**Not taken over:** the class pie chart (a bar or table states two counts better), the Grad-CAM cell of `Plotting_01` (it runs on an ImageNet model, not on our trained detectors; `phase2/` has Grad-CAM for both trained models), and anything computed on another dataset.
+
+## 4. New Phase I visualizations (`phase1/04_what_fools_the_detectors.ipynb`)
 
 All figures use only images and output logits, on the 10,000 validation images, for both models and 29 input conditions (the original 17 plus sharpening, blur-then-sharpen, saturation and blur-then-desaturate). The data are stored in a 7 MB bundle, so the notebook runs in about 30 seconds without the dataset, the weights or a GPU. `RECOMPUTE = True` rebuilds the bundle from local data.
 
@@ -100,7 +105,7 @@ All figures use only images and output logits, on the 10,000 validation images, 
 
 The galleries are chosen by stated, seeded rules, and the t-SNE caveats from Lecture 3 are applied: two perplexities, a PCA check, and groups taken from k-means on the descriptors rather than from the picture.
 
-## 4. Phase II plan
+## 5. Phase II plan
 
 The existing Phase II notebooks already cover Grad-CAM, exact output contributions, occlusion, filter and activation views, channel removal and explorers for both models. Phase I raised concrete questions that these tools can answer, and the lectures suggest several additions.
 
@@ -116,6 +121,6 @@ The existing Phase II notebooks already cover Grad-CAM, exact output contributio
 | **LIME (superpixels) / SHAP** on enlarged images, with the 32×32 limits stated | L04 | Is evidence local (object or background) or global texture? |
 | **Object vs border share of saliency**, using the centre/border proxy from Phase I | README plan | Does the detector look at the object or the background, as the CIFAKE paper suggests? |
 
-## 5. Not included in this PR
+## 6. Not included in this PR
 
 The midpoint submission also needs the AI interaction record, the GenAI reflection report and the video (at most 5 minutes). Those are not part of this PR.
