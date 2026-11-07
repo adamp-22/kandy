@@ -60,6 +60,7 @@ The CIFAKE authors' own Grad-CAM analysis suggested that their detector ignores 
 | `phase1/03_resnet18_behaviour.ipynb` | I | ResNet18 under the same edits, next to the CNN |
 | `phase1/04_what_fools_the_detectors.ipynb` | I | Both models, 29 conditions: the sharpness dial, confidence shift, ICE curves, classes and colour, a map of the fakes, model agreement |
 | `phase1/data/phase1_behaviour_bundle.npz` | I | Saved logits and image descriptors used by `04` (runs without the dataset) |
+| `phase1/05_human_vs_ai_figures.ipynb` | I | All Phase I figures in one place, split into feasible without AI (Part A) and AI-assisted (Part B) |
 | `phase2/01_cnn_internals.ipynb` | II | CNN Grad-CAM, neuron contributions, occlusion, filters, channel removal |
 | `phase2/02_resnet18_internals.ipynb` | II | ResNet18 Grad-CAM, output contributions, occlusion, stem filters, channel interventions, explorer |
 | `docs/visualization_overview.md` | I + II | Every visualization with its phase, lecture technique and Phase I verdict, plus the Phase II plan |
