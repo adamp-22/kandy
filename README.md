@@ -48,9 +48,9 @@ The CIFAKE authors' own Grad-CAM analysis suggested that their detector ignores 
 | 11.11.2026 | Midpoint (end of Phase I): code from both pairs, AI interaction log, progress video (max. 5 min) |
 | 09.12.2026 | Final (end of Phase II): all code, AI logs from both phases, 10-minute recorded presentation and slides |
 
-## Shorter Phase I variant
+## Phase I
 
-This branch, **`phase1-simple-variant`**, is a shorter walkthrough for review. The fuller version remains on [`phase1-new-variant`](https://github.com/adamp-22/kandy/tree/phase1-new-variant).
+The **[`phase1`](https://github.com/adamp-22/kandy/tree/phase1)** branch contains the current Phase I submission. Open **`Phase 1.code-workspace`** in VS Code to see the three submission notebooks together.
 
 Open the three notebooks inside `phase1/` in this order:
 
@@ -62,7 +62,7 @@ Open the three notebooks inside `phase1/` in this order:
 | `helpers.py` | Shared loading, batching, output-file handling and the pixel edits used in the galleries. Models, training loops and plotting stay in the notebooks. |
 | `data/` | Recorded measurements, training reports, predictions and previews. `data/README.md` explains each file. |
 
-Each question leads into a short calculation, a figure and a brief interpretation. Comments inside the code explain the intermediate steps, including data preparation, training and plotting. Section A1 in both model notebooks includes the full epoch table, training and validation loss and accuracy, and an explanation of the selected checkpoint. The model notebooks each have eight main figures. Sections A4–A5 follow individual blur responses and compare blur with resizing on the same images. B3 maps four image properties with PCA and compares scores before and after blur. Supporting score-distribution checks sit at the bottom; the ResNet notebook also compares both models. The extra maps, clustering, interactive tools and repeated summaries are preserved in the fuller branch rather than repeated here.
+Each question leads into a short calculation, a figure and a brief interpretation. Comments inside the code explain the intermediate steps, including data preparation, training and plotting. Section A1 in both model notebooks includes the full epoch table, training and validation loss and accuracy, and an explanation of the selected checkpoint. The model notebooks each have eight main figures. Sections A4–A5 follow individual blur responses and compare blur with resizing on the same images. B3 maps four image properties with PCA and compares scores before and after blur. Supporting score-distribution checks sit at the bottom; the ResNet notebook also compares both models.
 
 Part A groups standard visualizations, including the new lecture-inspired individual response and paired-score plots. Part B contains the explicitly AI-assisted follow-up investigations. This revision's code and prose were edited with AI assistance; the grouping does not establish human-only authorship for Part A. Keep the team's interaction log and actual contribution record with the submission.
 
@@ -72,4 +72,4 @@ The saved outputs are already visible. **Run All** also works without the full d
 
 Training code is included in both model notebooks. To train again, prepare `data/baseline_seed1/` using the original root data pipeline, then set `RUN_TRAINING = True`. A new run uses a fresh folder and saves the selected weights plus its history. ResNet18 downloads ImageNet weights only when training starts. The submission figures explicitly use the recorded experiment; they do not silently switch to a new run.
 
-The original root training notebooks and the two `phase2/` notebooks remain available. Their detailed development tools and model-internal analyses are outside this shorter Phase I reading path. See `docs/visualization_overview.md` for the figure guide.
+The original root training notebooks and the two `phase2/` notebooks remain available. Their detailed development tools and model-internal analyses are outside the Phase I reading path. See `docs/visualization_overview.md` for the figure guide. Previous Phase I versions are archived locally under `variants/previous-phase1/`; that folder is not part of the GitHub submission.

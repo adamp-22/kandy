@@ -1,4 +1,4 @@
-# Shorter Phase I reading guide
+# Phase I reading guide
 
 Read the three notebooks in `phase1/`. The data notebook has four figures. Each model notebook has eight main figures, with short supporting checks at the bottom. Code is divided into short cells, with comments beside the intermediate steps; training, important measurements and plotting remain visible.
 
@@ -20,8 +20,8 @@ Both models use 88,702 training images and 10,000 validation images, with the of
 
 `helpers.py` contains common loading, batching, file-saving and gallery pixel edits. `data/README.md` identifies the saved files and their sources. Review does not need the full dataset or model weights. New training runs use the audited local cache and new output folders. The figures continue to show the recorded experiment.
 
-Part A groups standard plots, including the new lecture-inspired views; Part B groups the sharpness, colour and PCA follow-up. The new plots also used AI assistance. This shorter revision was edited with AI assistance. Human-only authorship of the earlier figures is not established by the existing notes; the team's interaction log should document the actual contributions.
+Part A groups standard plots, including the lecture-inspired views; Part B groups the sharpness, colour and PCA follow-up. The new plots also used AI assistance. This submission's code and prose were edited with AI assistance. Human-only authorship of the earlier figures is not established by the existing notes; the team's interaction log should document the actual contributions.
 
-The full previous version is preserved on [phase1-new-variant](https://github.com/adamp-22/kandy/tree/phase1-new-variant), including the additional data views, sharpness deciles, centred response curves, prediction-change maps, clustering and error-overlap analysis. Phase II remains in `phase2/`, where Grad-CAM, contributions, occlusion, filters and channel interventions inspect the models internally.
+The current submission is on the `phase1` branch. Previous versions are saved locally under `variants/previous-phase1/`. Phase II remains in `phase2/`, where Grad-CAM, contributions, occlusion, filters and channel interventions inspect the models internally.
 
 These notebooks cover the code and figures. The submission also needs the team's interaction log, reflection and video.
