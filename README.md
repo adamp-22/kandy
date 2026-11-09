@@ -62,7 +62,7 @@ Open the three notebooks inside `phase1/` in this order:
 | `helpers.py` | Shared loading, batching, output-file handling and the pixel edits used in the galleries. Models, training loops and plotting stay in the notebooks. |
 | `data/` | Recorded measurements, training reports, predictions and previews. `data/README.md` explains each file. |
 
-Each question leads into a short calculation, a figure and a brief interpretation. The model notebooks each have five main figures. Supporting score-distribution checks sit at the bottom; the ResNet notebook also compares both models. The extra maps, clustering, interactive tools and repeated summaries are preserved in the fuller branch rather than repeated here.
+Each question leads into a short calculation, a figure and a brief interpretation. Section A1 in both model notebooks includes the full epoch table, training and validation loss and accuracy, and an explanation of the selected checkpoint. The model notebooks each have five main figures. Supporting score-distribution checks sit at the bottom; the ResNet notebook also compares both models. The extra maps, clustering, interactive tools and repeated summaries are preserved in the fuller branch rather than repeated here.
 
 Part A groups the earlier standard visualizations. Part B contains the explicitly AI-assisted follow-up investigations. This revision's code and prose were edited with AI assistance; the grouping does not establish human-only authorship for Part A. Keep the team's interaction log and actual contribution record with the submission.
 

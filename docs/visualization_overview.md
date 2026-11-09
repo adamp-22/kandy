@@ -6,7 +6,7 @@ Read the three notebooks in `phase1/`. The data notebook has four figures. Each 
 | --- | --- | --- |
 | Data exploration | What differs between REAL and FAKE inputs? | Seeded training examples, four property distributions, class medians and average images. |
 | Model training | How was the detector trained and selected? | Architecture, preprocessing, optimizer, training and validation functions, validation-loss selection and early stopping. |
-| Part A1 | What happened during training? | Recorded learning curves, selected epoch and clean accuracy. These document the experiment rather than constitute the behaviour investigation. |
+| Part A1 | What happened during training? | Complete epoch tables, recorded learning curves, a clearly marked checkpoint, selection reasoning and clean accuracy. These document the experiment rather than constitute the behaviour investigation. |
 | Part A2 | Can a small edit change one prediction? | A fake sensitive to blur and a real photo sensitive to sharpening, selected by a stated rule from the 600 previews. |
 | Part A3 | How common is the failure? | Fake detection and real-photo false alarms under JPEG, blur, resizing and noise, using all 10,000 validation images. |
 | Part B1 | What happens when detail is added instead of removed? | Sharpness versus predictions, sharpening and blur-then-sharpen controls, with the noise exception visible. |
