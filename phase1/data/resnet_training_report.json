@@ -1,0 +1,222 @@
+{
+  "model_digest": "2e997605045f67446c77f603a5ed2f3f3b7a6bd9d1ead0e0e26f2f9c26b872d5",
+  "manifest_sha256": "098210d89f9441376008d520f72aeef5f65a7aa6b5e0073ba4e875c979e1f205",
+  "selected_epoch": 5,
+  "history": [
+    {
+      "epoch": 1,
+      "phase": "head_warmup",
+      "train_loss": 0.3271139483530221,
+      "train_accuracy": 0.8631597934657618,
+      "val_loss": 0.27717931880126423,
+      "val_accuracy": 0.8842,
+      "val_roc_auc_fake": 0.954694,
+      "backbone_lr": 0.0001,
+      "head_lr": 0.001,
+      "seconds": 89.91572487493977
+    },
+    {
+      "epoch": 2,
+      "phase": "head_warmup",
+      "train_loss": 0.2713403274341892,
+      "train_accuracy": 0.8880408558995287,
+      "val_loss": 0.2630332069632795,
+      "val_accuracy": 0.893,
+      "val_roc_auc_fake": 0.95884496,
+      "backbone_lr": 0.0001,
+      "head_lr": 0.001,
+      "seconds": 89.38652508403175
+    },
+    {
+      "epoch": 3,
+      "phase": "full_finetune",
+      "train_loss": 0.14525477683268184,
+      "train_accuracy": 0.9484115352528691,
+      "val_loss": 0.09407335250174166,
+      "val_accuracy": 0.9671,
+      "val_roc_auc_fake": 0.99606892,
+      "backbone_lr": 0.0001,
+      "head_lr": 0.001,
+      "seconds": 282.0747667499818
+    },
+    {
+      "epoch": 4,
+      "phase": "full_finetune",
+      "train_loss": 0.06443427445429177,
+      "train_accuracy": 0.9767423507925413,
+      "val_loss": 0.08710688407322208,
+      "val_accuracy": 0.9714,
+      "val_roc_auc_fake": 0.99674188,
+      "backbone_lr": 0.0001,
+      "head_lr": 0.001,
+      "seconds": 298.4094493330922
+    },
+    {
+      "epoch": 5,
+      "phase": "full_finetune",
+      "train_loss": 0.04322375554473572,
+      "train_accuracy": 0.9842393632612568,
+      "val_loss": 0.06651567210200526,
+      "val_accuracy": 0.9792,
+      "val_roc_auc_fake": 0.99776484,
+      "backbone_lr": 0.0001,
+      "head_lr": 0.001,
+      "seconds": 307.59914924995974
+    },
+    {
+      "epoch": 6,
+      "phase": "full_finetune",
+      "train_loss": 0.029710382091681357,
+      "train_accuracy": 0.9895492773556402,
+      "val_loss": 0.08752202188079473,
+      "val_accuracy": 0.9748,
+      "val_roc_auc_fake": 0.9976811200000001,
+      "backbone_lr": 0.0001,
+      "head_lr": 0.001,
+      "seconds": 319.7763913748786
+    },
+    {
+      "epoch": 7,
+      "phase": "full_finetune",
+      "train_loss": 0.023072310831142563,
+      "train_accuracy": 0.9920407657099051,
+      "val_loss": 0.10116315290812225,
+      "val_accuracy": 0.9721,
+      "val_roc_auc_fake": 0.9977521599999999,
+      "backbone_lr": 0.0001,
+      "head_lr": 0.001,
+      "seconds": 304.0139679168351
+    },
+    {
+      "epoch": 8,
+      "phase": "full_finetune",
+      "train_loss": 0.0213554041692344,
+      "train_accuracy": 0.9925931771549683,
+      "val_loss": 0.08331854197901536,
+      "val_accuracy": 0.9762,
+      "val_roc_auc_fake": 0.9978281999999999,
+      "backbone_lr": 0.0001,
+      "head_lr": 0.001,
+      "seconds": 308.3937840000726
+    },
+    {
+      "epoch": 9,
+      "phase": "full_finetune",
+      "train_loss": 0.005687748370305922,
+      "train_accuracy": 0.998004554575996,
+      "val_loss": 0.07982239523449455,
+      "val_accuracy": 0.9828,
+      "val_roc_auc_fake": 0.9985723200000001,
+      "backbone_lr": 5e-05,
+      "head_lr": 0.0005,
+      "seconds": 325.40741020813584
+    },
+    {
+      "epoch": 10,
+      "phase": "full_finetune",
+      "train_loss": 0.0038862997668562224,
+      "train_accuracy": 0.9987937137832292,
+      "val_loss": 0.09074956955713656,
+      "val_accuracy": 0.9818,
+      "val_roc_auc_fake": 0.9985254,
+      "backbone_lr": 5e-05,
+      "head_lr": 0.0005,
+      "seconds": 332.5981841250323
+    }
+  ],
+  "evaluation": {
+    "validation": {
+      "n": 10000,
+      "loss": 0.06651567210200526,
+      "accuracy": 0.9792,
+      "balanced_accuracy": 0.9792000000000001,
+      "f1_fake": 0.9792456595489922,
+      "roc_auc_fake": 0.99776484,
+      "fake_detection_rate": 0.9814,
+      "real_flagged_fake_rate": 0.023,
+      "brier_score_fake": 0.016770363905868647,
+      "confusion_matrix": [
+        [
+          4907,
+          93
+        ],
+        [
+          115,
+          4885
+        ]
+      ],
+      "confusion_matrix_order": [
+        "FAKE",
+        "REAL"
+      ]
+    },
+    "official_test": {
+      "n": 20000,
+      "loss": 0.07248484749426133,
+      "accuracy": 0.97735,
+      "balanced_accuracy": 0.9773499999999999,
+      "f1_fake": 0.9774031027086347,
+      "roc_auc_fake": 0.99752455,
+      "fake_detection_rate": 0.9797,
+      "real_flagged_fake_rate": 0.025,
+      "brier_score_fake": 0.01811010844786848,
+      "confusion_matrix": [
+        [
+          9797,
+          203
+        ],
+        [
+          250,
+          9750
+        ]
+      ],
+      "confusion_matrix_order": [
+        "FAKE",
+        "REAL"
+      ]
+    },
+    "unique_test": {
+      "n": 19962,
+      "loss": 0.0726062067124877,
+      "accuracy": 0.977306883077848,
+      "balanced_accuracy": 0.9773112828749246,
+      "f1_fake": 0.9773171098092234,
+      "roc_auc_fake": 0.9975194037341899,
+      "fake_detection_rate": 0.9796225657498494,
+      "real_flagged_fake_rate": 0.025,
+      "brier_score_fake": 0.018142242860525102,
+      "confusion_matrix": [
+        [
+          9759,
+          203
+        ],
+        [
+          250,
+          9750
+        ]
+      ],
+      "confusion_matrix_order": [
+        "FAKE",
+        "REAL"
+      ]
+    },
+    "selected_epoch": 5,
+    "model_digest": "2e997605045f67446c77f603a5ed2f3f3b7a6bd9d1ead0e0e26f2f9c26b872d5",
+    "manifest_sha256": "098210d89f9441376008d520f72aeef5f65a7aa6b5e0073ba4e875c979e1f205"
+  },
+  "training": {
+    "seed": 1,
+    "epochs": 25,
+    "warmup_epochs": 2,
+    "batch_size": 64,
+    "backbone_lr": 0.0001,
+    "head_lr": 0.001,
+    "weight_decay": 0.0001,
+    "patience": 5,
+    "min_delta": 0.0001,
+    "checkpoint_batches": 200,
+    "max_hours": 6.0
+  },
+  "source": "Recorded runs/resnet18_plain_seed1/share/resnet18_report.json",
+  "source_sha256": "5610675b41232446849bf03fce055bc451054304b1fceddd0f181a85d4fcaf90"
+}

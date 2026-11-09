@@ -52,20 +52,22 @@ The CIFAKE authors' own Grad-CAM analysis suggested that their detector ignores 
 
 | Path | Phase | What it contains |
 | --- | --- | --- |
-| `baseline_training.ipynb` | Training | Small CNN: data split and audit, training, epoch report, learning curves, official test evaluation (weights bundled) |
-| `resnet18_finetuning.ipynb` | Training | ResNet18 fine-tuning pipeline, epoch report, confusion matrix, clean test (weights from the team release) |
-| `phase1/01_training_data_exploration.ipynb` | I | How REAL and FAKE training images differ: properties, spectra, average images, colour channels, cues per object class, pixel-space projection; hypotheses for the behaviour tests |
-| `phase1/data/training_data_extra_bundle.npz` | I | Saved statistics used by `01` Section 5 (runs without the dataset) |
-| `phase1/02_cnn_behaviour.ipynb` | I | CNN under JPEG, blur, resize and noise on 10,000 validation images |
-| `phase1/03_resnet18_behaviour.ipynb` | I | ResNet18 under the same edits, next to the CNN |
-| `phase1/04_what_fools_the_detectors.ipynb` | I | Both models, 29 conditions: the sharpness dial, confidence shift, ICE curves, classes and colour, a map of the fakes, model agreement |
-| `phase1/data/phase1_behaviour_bundle.npz` | I | Saved logits and image descriptors used by `04` (runs without the dataset) |
-| `phase1/05_human_vs_ai_figures.ipynb` | I | All Phase I figures in one place, split into feasible without AI (Part A) and AI-assisted (Part B) |
+| `phase1/01_data_exploration.ipynb` | I | Load and visualize the training data: examples, counts, colour, sharpness, frequencies and pixel projections |
+| `phase1/02_cnn_training_and_visualization.ipynb` | I | CNN architecture and training; saved learning curves and evaluation; Part A standard figures; Part B AI-assisted behaviour analysis |
+| `phase1/03_resnet18_finetuning_and_visualization.ipynb` | I | ResNet18 classifier warmup and full fine-tuning; saved learning curves and evaluation; Part A standard figures; Part B AI-assisted analysis and CNN comparison |
+| `phase1/data/` | I | Saved training reports, measurements, predictions and preview images used by the three notebooks |
 | `phase2/01_cnn_internals.ipynb` | II | CNN Grad-CAM, neuron contributions, occlusion, filters, channel removal |
 | `phase2/02_resnet18_internals.ipynb` | II | ResNet18 Grad-CAM, output contributions, occlusion, stem filters, channel interventions, explorer |
-| `docs/visualization_overview.md` | I + II | Every visualization with its phase, lecture technique and Phase I verdict, plus the Phase II plan |
+| `baseline_training.ipynb`, `resnet18_finetuning.ipynb` | Original pipelines | Original data preparation, training/resume and model-export tools; retained for reproducibility and Phase II |
+| `docs/visualization_overview.md` | I + II | Where to find the training steps and figures, and how the two visualization sections are labelled |
 | `team-info.json`, `workload.json` | — | Team registration |
 
-The analysis uses only the CIFAKE dataset with our audited split and our two models (baseline CNN, fine-tuned ResNet18). All notebooks open in review mode and do not train. Run them from their own folder; the phase notebooks find the repository root through `team-info.json`.
+**Phase I now has exactly three notebooks.** Open `phase1/` in VS Code and read them in order.
+Training is included directly in `02` and `03`; each model notebook then has its own two figure sections.
+Code is divided into small cells with `#` comments and explanations between steps.
 
-Phase I uses smaller code cells with comments explaining each step. `01` reads the saved training measurements, `02` reads the CNN predictions embedded in the notebook, and `03`–`04` read the shared behaviour bundle. The ResNet comparison therefore needs no model download. Optional rebuild cells in `01` and `04` explain how the bundles were made and require the local data (and, for `04`, the saved weights). Written interpretations refer to the bundled experiment; check them again if rebuilding with different results. `05` collects the saved figures and should be run last.
+Part A is labelled **Standard visualizations (feasible without AI)**. This describes the techniques, not verified human-only authorship. The existing notes do not establish which figures were made without AI, and this revision was edited with AI assistance. Part B contains the explicitly AI-assisted follow-up analyses. This grouping does not replace the team's AI interaction log.
+
+All three notebooks include executed outputs. Their default **Run All** uses the bundled results and does not train, download weights or need the CIFAKE dataset. Use the project's Python environment and keep the notebooks inside the repository: they find its root through `team-info.json`.
+
+To train again, prepare the audited `data/baseline_seed1/` cache using the original root data pipeline, then set `RUN_TRAINING = True` in `02` or `03`. The simplified loops contain the model, optimizer, validation, early stopping and checkpoint selection. They save into a new run folder; ResNet18 downloads ImageNet weights when training starts. The submission figures continue to show the recorded experiment and are labelled accordingly.
