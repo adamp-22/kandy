@@ -1,6 +1,6 @@
 # Shorter Phase I reading guide
 
-Read the three notebooks in `phase1/`. The data notebook has four figures. Each model notebook has five main figures, with short supporting checks at the bottom. Code cells contain at most 27 lines; training, important measurements and plotting remain visible.
+Read the three notebooks in `phase1/`. The data notebook has four figures. Each model notebook has seven main figures, with short supporting checks at the bottom. Code cells contain at most 27 lines; training, important measurements and plotting remain visible.
 
 | Notebook/section | Question | Evidence |
 | --- | --- | --- |
@@ -9,6 +9,8 @@ Read the three notebooks in `phase1/`. The data notebook has four figures. Each 
 | Part A1 | What happened during training? | Complete epoch tables, recorded learning curves, a clearly marked checkpoint, selection reasoning and clean accuracy. These document the experiment rather than constitute the behaviour investigation. |
 | Part A2 | Can a small edit change one prediction? | A fake sensitive to blur and a real photo sensitive to sharpening, selected by a stated rule from the 600 previews. |
 | Part A3 | How common is the failure? | Fake detection and real-photo false alarms under JPEG, blur, resizing and noise, using all 10,000 validation images. |
+| Part A4 | Does every fake react to blur in the same way? | ICE-inspired curves: the same 20 seeded fakes in both notebooks, the mean over all 5,000, and the decision threshold. Lecture 04, slides 20–23. |
+| Part A5 | Do blur and resizing fool the same images? | Paired P(FAKE) scatter for all 5,000 fakes, with threshold quadrants and exact counts. Lecture 02, slide 7 (Anscombe's quartet). |
 | Part B1 | What happens when detail is added instead of removed? | Sharpness versus predictions, sharpening and blur-then-sharpen controls, with the noise exception visible. |
 | Part B2 | Does colour help some fakes survive blur? | Object-class trajectories through blur and reduced saturation, plus a colour-only control. |
 | Supporting checks | Is it a score shift, and do both models respond similarly? | Resize logit distributions with AUC; paired CNN/ResNet scores in notebook 03. |
@@ -17,8 +19,8 @@ Both models use 88,702 training images and 10,000 validation images, with the of
 
 `helpers.py` contains common loading, batching, file-saving and gallery pixel edits. `data/README.md` identifies the saved files and their sources. Review does not need the full dataset or model weights. New training runs use the audited local cache and new output folders. The figures continue to show the recorded experiment.
 
-Part A groups earlier standard plots and Part B groups AI-assisted follow-up. This shorter revision was edited with AI assistance. Human-only authorship of the earlier figures is not established by the existing notes; the team's interaction log should document the actual contributions.
+Part A groups standard plots, including the new lecture-inspired views; Part B groups the sharpness and colour follow-up. The new plots also used AI assistance. This shorter revision was edited with AI assistance. Human-only authorship of the earlier figures is not established by the existing notes; the team's interaction log should document the actual contributions.
 
-The full previous version is preserved on [phase1-new-variant](https://github.com/adamp-22/kandy/tree/phase1-new-variant), including the additional data views, sharpness deciles, individual response curves, prediction-change maps, clustering and error-overlap analysis. Phase II remains in `phase2/`, where Grad-CAM, contributions, occlusion, filters and channel interventions inspect the models internally.
+The full previous version is preserved on [phase1-new-variant](https://github.com/adamp-22/kandy/tree/phase1-new-variant), including the additional data views, sharpness deciles, centred response curves, prediction-change maps, clustering and error-overlap analysis. Phase II remains in `phase2/`, where Grad-CAM, contributions, occlusion, filters and channel interventions inspect the models internally.
 
 These notebooks cover the code and figures. The submission also needs the team's interaction log, reflection and video.
