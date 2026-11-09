@@ -14,12 +14,12 @@ This document lists every visualization we currently have, says which phase it b
 | `resnet18_finetuning.ipynb` | Training | ResNet18 fine-tuning pipeline, epoch report, learning curves, confusion matrix, clean test | Yes (downloads the release package) |
 | `phase1/01_training_data_exploration.ipynb` | I | Training-data EDA (formerly baseline Section 4), **new** Section 5 (average images, colour channels, cues per object class, fine detail and file size, pixel-space projection) and the hypotheses they give | Yes (figures and `phase1/data/training_data_extra_bundle.npz` bundled) |
 | `phase1/02_cnn_behaviour.ipynb` | I | CNN under JPEG, blur, resize and noise (formerly baseline Sections 10–11) | Yes |
-| `phase1/03_resnet18_behaviour.ipynb` | I | ResNet18 under the same edits, next to the CNN (formerly ResNet Section 6) | Yes (downloads the release package) |
+| `phase1/03_resnet18_behaviour.ipynb` | I | ResNet18 under the same edits, next to the CNN (formerly ResNet Section 6) | Yes (reads the shared behaviour bundle; no model download) |
 | `phase1/04_what_fools_the_detectors.ipynb` | I | **New.** Both models, 29 conditions, patterns behind the errors | Yes (`phase1/data/phase1_behaviour_bundle.npz`) |
 | `phase2/01_cnn_internals.ipynb` | II | CNN Grad-CAM, contributions, occlusion, filters, channel removal (formerly baseline Sections 12–13) | Yes |
 | `phase2/02_resnet18_internals.ipynb` | II | ResNet18 Grad-CAM, contributions, occlusion, filters, channel interventions, explorer (formerly ResNet Sections 7–9) | Yes (downloads the release package) |
 
-The moved cells are unchanged apart from section numbers and cross-references. Each phase notebook finds the repository root by walking up to `team-info.json`, reads its own embedded data, and was executed in a clean folder without `data/` or `runs/` to check that it runs on a fresh clone. The training notebooks keep everything their pipelines need. The ResNet runtime cells still contain all analysis functions, because the training pipeline uses them to build the saved analysis package.
+The Phase I reading variant separates setup, calculations, plots and interpretations into smaller cells with inline comments. It uses the same saved experiments and conditions. The behaviour notebooks read predictions directly, and the training-data notebook reads saved measurements; model-loading and training utilities are no longer needed for these plots. Optional rebuild recipes in `01` and `04` retain the steps used to produce the bundles. Each phase notebook finds the repository root through `team-info.json`. The Phase I notebooks are checked in a clean folder without the dataset, weights or `runs/`; `05` reads their executed figure outputs and runs last. The training notebooks still contain the pipelines used to train and prepare results.
 
 ## 2. Are the existing visualizations fine for Phase I?
 

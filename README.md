@@ -66,4 +66,6 @@ The CIFAKE authors' own Grad-CAM analysis suggested that their detector ignores 
 | `docs/visualization_overview.md` | I + II | Every visualization with its phase, lecture technique and Phase I verdict, plus the Phase II plan |
 | `team-info.json`, `workload.json` | — | Team registration |
 
-The analysis uses only the CIFAKE dataset with our audited split and our two models (baseline CNN, fine-tuned ResNet18). All notebooks open in review mode: they load saved weights and results and do not train. Run them from their own folder; the phase notebooks find the repository root through `team-info.json`.
+The analysis uses only the CIFAKE dataset with our audited split and our two models (baseline CNN, fine-tuned ResNet18). All notebooks open in review mode and do not train. Run them from their own folder; the phase notebooks find the repository root through `team-info.json`.
+
+Phase I uses smaller code cells with comments explaining each step. `01` reads the saved training measurements, `02` reads the CNN predictions embedded in the notebook, and `03`–`04` read the shared behaviour bundle. The ResNet comparison therefore needs no model download. Optional rebuild cells in `01` and `04` explain how the bundles were made and require the local data (and, for `04`, the saved weights). Written interpretations refer to the bundled experiment; check them again if rebuilding with different results. `05` collects the saved figures and should be run last.
