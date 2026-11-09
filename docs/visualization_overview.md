@@ -1,6 +1,6 @@
 # Shorter Phase I reading guide
 
-Read the three notebooks in `phase1/`. The data notebook has four figures. Each model notebook has seven main figures, with short supporting checks at the bottom. Code cells contain at most 27 lines; training, important measurements and plotting remain visible.
+Read the three notebooks in `phase1/`. The data notebook has four figures. Each model notebook has eight main figures, with short supporting checks at the bottom. Code is divided into short cells, with comments beside the intermediate steps; training, important measurements and plotting remain visible.
 
 | Notebook/section | Question | Evidence |
 | --- | --- | --- |
@@ -13,13 +13,14 @@ Read the three notebooks in `phase1/`. The data notebook has four figures. Each 
 | Part A5 | Do blur and resizing fool the same images? | Paired P(FAKE) scatter for all 5,000 fakes, with threshold quadrants and exact counts. Lecture 02, slide 7 (Anscombe's quartet). |
 | Part B1 | What happens when detail is added instead of removed? | Sharpness versus predictions, sharpening and blur-then-sharpen controls, with the noise exception visible. |
 | Part B2 | Does colour help some fakes survive blur? | Object-class trajectories through blur and reduced saturation, plus a colour-only control. |
+| Part B3 | Which kinds of fakes keep high scores after blur? | PCA of four standardized original-image properties, with identical positions coloured by scores before and after blur. No predictions or hidden activations enter the projection. Lecture 03, slides 6–7, 14 and 17. |
 | Supporting checks | Is it a score shift, and do both models respond similarly? | Resize logit distributions with AUC; paired CNN/ResNet scores in notebook 03. |
 
 Both models use 88,702 training images and 10,000 validation images, with the official 20,000-image test set kept for evaluation. CNN selected epoch 19 out of 24; ResNet18 selected epoch 5 out of 10. FAKE is label 0 and REAL is label 1. The model output is a REAL logit, so negative values predict FAKE.
 
 `helpers.py` contains common loading, batching, file-saving and gallery pixel edits. `data/README.md` identifies the saved files and their sources. Review does not need the full dataset or model weights. New training runs use the audited local cache and new output folders. The figures continue to show the recorded experiment.
 
-Part A groups standard plots, including the new lecture-inspired views; Part B groups the sharpness and colour follow-up. The new plots also used AI assistance. This shorter revision was edited with AI assistance. Human-only authorship of the earlier figures is not established by the existing notes; the team's interaction log should document the actual contributions.
+Part A groups standard plots, including the new lecture-inspired views; Part B groups the sharpness, colour and PCA follow-up. The new plots also used AI assistance. This shorter revision was edited with AI assistance. Human-only authorship of the earlier figures is not established by the existing notes; the team's interaction log should document the actual contributions.
 
 The full previous version is preserved on [phase1-new-variant](https://github.com/adamp-22/kandy/tree/phase1-new-variant), including the additional data views, sharpness deciles, centred response curves, prediction-change maps, clustering and error-overlap analysis. Phase II remains in `phase2/`, where Grad-CAM, contributions, occlusion, filters and channel interventions inspect the models internally.
 
