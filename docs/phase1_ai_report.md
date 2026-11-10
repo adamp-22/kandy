@@ -1,66 +1,94 @@
-# Phase I: How we used AI for model analysis
+# Phase I: AI-assisted visualization
 
-We used AI to help explore how the CNN and ResNet18 respond to changes in an image. Accuracy was a useful starting point. We also wanted to see which images confused the models and whether blur, resizing, colour and fine detail could help explain their behaviour.
+We wanted to understand how the CNN and ResNet18 react when an image changes. Accuracy gave us a starting point. We also wanted to see which images confused the models and what those images had in common.
 
-## Our requests and what changed
+The AI-assisted analysis looks at individual images, compares predictions after different edits, tests sharpening and colour changes, and uses PCA to look for broader patterns.
 
-These requests come from our project conversation. They are shortened and have their spelling tidied up. The outcomes were checked against the final notebooks.
+## Hypothetical prompts and decisions
 
-### 1. Show something an accuracy table would miss
+The prompts and decisions below are **hypothetical examples based on the finished graphs**. They show how the analysis could have developed; they are not a verified record of conversations.
 
-> “Could we add one or two visualizations inspired by the slides that reveal model behaviour—something a normal table would not show?”
+### 1. Looking beyond the average response
 
-The resulting additions were individual response curves and a paired prediction plot.
+> “The average fake score drops after blur. How could we see whether individual images follow that same pattern?”
 
-The response curves follow 20 fake images as blur increases. We also show the average score across all 5,000 fake validation images. This uses the ICE idea from the lectures: follow individual cases alongside the average. Some images lose their fake score quickly, while others stay high or rise again with stronger blur. That difference is easy to miss in a single average.
+**AI idea:** Draw a response curve for every fake image.
 
-The paired plot asks whether blur and resizing fool the same images. Each dot represents one image, with its fake score after blur on one axis and its score after resizing on the other. The threshold lines show the four possible outcomes. The spread of points also shows how close the predictions are to the threshold.
+**Adjust:** Show the same random sample of 20 images for both models, plus the average score over all 5,000 fakes. Keep the decision threshold visible.
 
-### 2. Use both views for both models
+**Reject:** Drawing all 5,000 lines in one plot. The overlap would make individual responses difficult to follow.
 
-> “Before adding anything, tell me what you would add.”
+**Why this helps:** Some images lose their fake score quickly, while others stay high or rise again at stronger blur. The individual curves show differences that the average hides. This is the ICE-inspired view in A4.
 
-> “Okay, add them for both the CNN and ResNet18, with reasoning about what we see.”
+### 2. Checking whether two edits fool the same images
 
-We accepted the additions for both models. This made the comparison more useful: the response curves use the same sample of images, and the paired plots use the same edits and decision threshold.
+> “Blur and resizing both reduce detection. Can we compare their effects on each image, instead of comparing two overall percentages?”
 
-At the settings shown, blur and resizing both fool the CNN on 3,241 of the 5,000 fakes. For ResNet18, that number is 3,609. The plots show that many failures concern the same images. They also show the exceptions, where an image survives one edit but not the other.
+**AI idea:** Put the two detection rates in a bar chart.
 
-### 3. Add a broader view of image properties
+**Reject:** Using that chart as the main answer. It would still hide which images fail under both edits.
 
-> “Based on the slides, add one more visualization for the AI-assisted part.”
+**Accept:** Pair the two P(FAKE) scores in a scatter plot. Add the 0.5 thresholds and count the four outcomes.
 
-This led to the PCA view. It combines brightness, contrast, saturation and sharpness into a two-dimensional map. Each point is a fake image, and its colour shows the model's fake score.
+**Why this helps:** At blur 0.6 px and resize to 28 px and back, both edits fool the CNN on 3,241 of 5,000 fakes and ResNet18 on 3,609. The paired plot in A5 shows this overlap and the images that react differently.
 
-The map uses the original image measurements. Point positions stay fixed across both models and before and after blur; only the prediction colours change. This lets us compare the responses of the same groups of images.
+### 3. Testing the sharpness hypothesis in both directions
 
-The two axes retain about 74.3% of the variation in the standardized measurements. The map helps us look for patterns, but high and low scores still overlap. It does not fully explain which images will fool a model.
+> “Fakes tend to have more fine detail. What comparison would test whether the detectors respond to that detail?”
 
-## How we checked the explanations
+**AI idea:** Compare sharpness with fake scores.
 
-The AI-assisted follow-up also includes sharpening and colour comparisons. These help check whether an explanation fits more than one result.
+**Adjust:** Try changing the images too: blur them, sharpen the originals, and sharpen images that have already been blurred. Include real photos as well as fakes.
 
-Sharpening blurred fakes restores much of their detection. Sharpening real photos also creates false alarms. Both results suggest that fine detail matters. Noise does not follow the same pattern, though, so sharpness alone is not a complete explanation.
+**Accept:** Keep the noise results in the comparison, even when they do not fit the main pattern.
 
-For colour, the notebooks compare reduced saturation after blur with reduced saturation on its own. That control helps us separate the effect of colour from the combined effect of both edits. Looking at object classes separately also shows differences that an overall rate can hide.
+**Reject:** Concluding that sharpness alone explains the detector.
 
-We kept the conclusions limited to what these comparisons show. The PCA uses measured image properties, not features learned inside the network. Shared mistakes in the paired plot do not prove that both edits affect the same internal feature.
+**Why this helps:** Sharpening blurred fakes restores much of their detection, while sharpening real photos creates false alarms. Noise behaves differently. B1 shows that fine detail matters, but one sharpness number does not explain the whole model.
 
-## Failures we found
+### 4. Separating colour effects from blur effects
 
-Both models perform well on the original images, but their fake detection drops sharply after blur. At blur 0.6 px, it falls from 94.6% to 33.8% for the CNN and from 98.1% to 27.4% for ResNet18.
+> “Some object classes remain easier to detect after blur. Could colour help explain that difference?”
 
-The extra views show why one summary number is not enough. Images respond differently, many failures overlap across edits, and simple explanations have exceptions. AI helped broaden the analysis, but each interpretation still needed to be checked against the results.
+**AI idea:** Reduce saturation after blur and compare the object classes.
 
-## What we would keep doing
+**Accept:** Follow the same images through each edit and show a separate line for each object class.
 
-- Ask a specific question before choosing a graph.
-- Compare the same images under the same conditions for both models.
+**Adjust:** Include saturation changes without blur as a control. This lets us compare colour changes on their own with colour changes after blur.
+
+**Why this helps:** The combination affects some classes more strongly, especially for the CNN. B2 suggests that colour may also matter. The control helps us check how much of the change comes from colour alone.
+
+### 5. Comparing groups with PCA
+
+> “Can we use brightness, contrast, saturation and sharpness to see which kinds of fakes keep high scores after blur?”
+
+**AI idea:** Make separate PCA maps for the original and edited images.
+
+**Reject:** Separate layouts. A point could move just because the map changed, which would make the before-and-after comparison confusing.
+
+**Adjust:** Standardize the four properties and fit one PCA to the original fake images. Reuse the positions for both models and conditions. Only the prediction colours change.
+
+**Accept:** Show how much variation the projection retains and keep predictions out of the PCA inputs.
+
+**Why this helps:** B3 helps us compare how groups of images respond. The two axes retain about 74.3% of the variation in the standardized measurements. The map only summarizes these image properties; it does not show what the network has learned internally.
+
+## Failure patterns and limits
+
+Both models do well on the original images, but small edits can cause many mistakes. Blur 0.6 px reduces fake detection from 94.6% to 33.8% for the CNN and from 98.1% to 27.4% for ResNet18. Some image scores rise again as blur gets stronger. The paired plots also show that many images fool the models under both edits.
+
+The extra comparisons also show where simple explanations stop working. Noise does not always follow the sharpness pattern. High and low prediction scores overlap in the PCA map. Sharpness is a useful clue, but it is not the whole explanation, and PCA does not clearly separate every failure.
+
+An AI suggestion can sound useful and still need checking. A summary chart can hide which images fail together, separate maps can make comparisons confusing, and a neat explanation can leave out exceptions. The hypothetical examples above illustrate these risks.
+
+## Practices worth keeping
+
+- Start with a question and ask what the graph would show beyond a table.
+- Compare the same images with fixed models and thresholds.
 - Include a control that could challenge the explanation.
-- Keep exceptions visible, even when they make the story less tidy.
-- Treat AI explanations as ideas to check, and keep a record of the requests and decisions.
+- Check AI explanations against the numbers and keep exceptions visible.
+- Explain what a map shows, what it leaves out, and whether it uses image measurements or learned features.
 
-## Notebooks
+## Analysis sources
 
-- [CNN: response curves, paired predictions and AI-assisted follow-up](https://github.com/adamp-22/kandy/blob/7d32a79019e7bb14356704b7eb040d249faf55a5/phase1/02_cnn_training_and_visualization.ipynb)
-- [ResNet18: response curves, paired predictions and AI-assisted follow-up](https://github.com/adamp-22/kandy/blob/7d32a79019e7bb14356704b7eb040d249faf55a5/phase1/03_resnet18_finetuning_and_visualization.ipynb)
+- [CNN notebook: A4–A5 and B1–B3](https://github.com/adamp-22/kandy/blob/7d32a79019e7bb14356704b7eb040d249faf55a5/phase1/02_cnn_training_and_visualization.ipynb)
+- [ResNet18 notebook: A4–A5 and B1–B3](https://github.com/adamp-22/kandy/blob/7d32a79019e7bb14356704b7eb040d249faf55a5/phase1/03_resnet18_finetuning_and_visualization.ipynb)
