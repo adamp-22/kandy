@@ -1,0 +1,27 @@
+# Phase I reading guide
+
+Read the three notebooks in `phase1/`. The data notebook has four figures. Each model notebook has eight main figures, with short supporting checks at the bottom. Code is divided into short cells, with comments beside the intermediate steps; training, important measurements and plotting remain visible.
+
+| Notebook/section | Question | Evidence |
+| --- | --- | --- |
+| Data exploration | What differs between REAL and FAKE inputs? | Seeded training examples, four property distributions, class medians and average images. |
+| Model training | How was the detector trained and selected? | Architecture, preprocessing, optimizer, training and validation functions, validation-loss selection and early stopping. |
+| Part A1 | What happened during training? | Complete epoch tables, recorded learning curves, a clearly marked checkpoint, selection reasoning and clean accuracy. These document the experiment rather than constitute the behaviour investigation. |
+| Part A2 | Can a small edit change one prediction? | A fake sensitive to blur and a real photo sensitive to sharpening, selected by a stated rule from the 600 previews. |
+| Part A3 | How common is the failure? | Fake detection and real-photo false alarms under JPEG, blur, resizing and noise, using all 10,000 validation images. |
+| Part A4 | Does every fake react to blur in the same way? | ICE-inspired curves: the same 20 seeded fakes in both notebooks, the mean over all 5,000, and the decision threshold. Lecture 04, slides 20–23. |
+| Part A5 | Do blur and resizing fool the same images? | Paired P(FAKE) scatter for all 5,000 fakes, with threshold quadrants and exact counts. Lecture 02, slide 7 (Anscombe's quartet). |
+| Part B1 | What happens when detail is added instead of removed? | Sharpness versus predictions, sharpening and blur-then-sharpen controls, with the noise exception visible. |
+| Part B2 | Does colour help some fakes survive blur? | Object-class trajectories through blur and reduced saturation, plus a colour-only control. |
+| Part B3 | Which kinds of fakes keep high scores after blur? | PCA of four standardized original-image properties, with identical positions coloured by scores before and after blur. No predictions or hidden activations enter the projection. Lecture 03, slides 6–7, 14 and 17. |
+| Supporting checks | Is it a score shift, and do both models respond similarly? | Resize logit distributions with AUC; paired CNN/ResNet scores in notebook 03. |
+
+Both models use 88,702 training images and 10,000 validation images, with the official 20,000-image test set kept for evaluation. CNN selected epoch 19 out of 24; ResNet18 selected epoch 5 out of 10. FAKE is label 0 and REAL is label 1. The model output is a REAL logit, so negative values predict FAKE.
+
+`helpers.py` contains common loading, batching, file-saving and gallery pixel edits. `data/README.md` identifies the saved files and their sources. Review does not need the full dataset or model weights. `phase1/prepare_data.py` prepares the audited local cache from the original CIFAKE images. New training runs reuse this cache and write to new output folders. The figures continue to show the recorded experiment.
+
+Part A groups standard plots, including the lecture-inspired views; Part B groups the sharpness, colour and PCA follow-up. The new plots also used AI assistance. This submission's code and prose were edited with AI assistance. Human-only authorship of the earlier figures is not established by the existing notes; the team's interaction log should document the actual contributions.
+
+The current Phase I submission is on `main`. Previous versions, including the Phase II notebooks, are saved locally under `variants/previous-phase1/`.
+
+These notebooks cover the code and figures. The submission also needs the team's interaction log, reflection and video.
